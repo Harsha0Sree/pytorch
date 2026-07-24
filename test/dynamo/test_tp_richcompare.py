@@ -1,5 +1,5 @@
 # Owner(s): ["module: dynamo"]
-"""Tests for richcompare_impl: unified comparison protocol in Dynamo."""
+"""Tests for tp_richcompare_impl: unified comparison protocol in Dynamo."""
 
 import operator
 import unittest
@@ -797,7 +797,7 @@ class TpRichcompareTests(torch._dynamo.test_case.TestCase):
         """dict_keys compared against a set subclass with custom __len__/__contains__.
 
         CPython's dictview_richcompare calls PyObject_Size and
-        PySequence_Contains which go through sq_length/sq_contains slots.
+        PySequence_Contains which go through sq_length_impl/sq_contains_impl slots.
         Our polyfill must respect these overrides.
         """
 

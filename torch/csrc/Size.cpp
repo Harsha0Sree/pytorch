@@ -209,14 +209,14 @@ binaryfunc mp_subscript = PyTuple_Type.tp_as_mapping->mp_subscript;
 } // namespace
 
 static PySequenceMethods THPSize_as_sequence = {
-    nullptr, /* sq_length */
+    nullptr, /* sq_length_impl */
     &THPSize_concat, /* sq_concat */
     wrap_tuple_fn<decltype(&sq_repeat), &sq_repeat>,
     nullptr, /* sq_item */
     nullptr, /* sq_slice */
     nullptr, /* sq_ass_item */
     nullptr, /* sq_ass_slice */
-    nullptr /* sq_contains */
+    nullptr /* sq_contains_impl */
 };
 
 #if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 14
@@ -237,7 +237,7 @@ static Py_hash_t THPSize_hash(PyObject* self) {
 #endif
 
 static PyMappingMethods THPSize_as_mapping = {
-    nullptr, /* mp_length */
+    nullptr, /* mp_length_impl */
     wrap_tuple_fn<decltype(&mp_subscript), &mp_subscript>,
     nullptr};
 

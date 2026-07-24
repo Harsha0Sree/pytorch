@@ -34,7 +34,7 @@ class TestTypeSlots(TestCase):
         """Test that dict has mapping protocol but not sequence protocol."""
         seq_slots, map_slots, num_slots, type_slots = self._get_slot_info(dict)
 
-        # dict should NOT have sq_length (sequence protocol)
+        # dict should NOT have sq_length_impl (sequence protocol)
         self.assertFalse(has_slot(seq_slots, PySequenceSlots.SQ_LENGTH))
 
         # dict SHOULD have mapping protocol
@@ -51,7 +51,7 @@ class TestTypeSlots(TestCase):
         self.assertTrue(has_slot(seq_slots, PySequenceSlots.SQ_ITEM))
         self.assertTrue(has_slot(seq_slots, PySequenceSlots.SQ_CONTAINS))
 
-        # list also has mapping protocol for compatibility (mp_length, mp_subscript, mp_ass_subscript)
+        # list also has mapping protocol for compatibility (mp_length_impl, mp_subscript, mp_ass_subscript)
         self.assertTrue(has_slot(map_slots, PyMappingSlots.MP_LENGTH))
         self.assertTrue(has_slot(map_slots, PyMappingSlots.MP_SUBSCRIPT))
 
@@ -68,7 +68,7 @@ class TestTypeSlots(TestCase):
         """Test that set has sequence protocol for contains."""
         seq_slots, map_slots, num_slots, type_slots = self._get_slot_info(set)
 
-        # set SHOULD have sq_contains
+        # set SHOULD have sq_contains_impl
         self.assertTrue(has_slot(seq_slots, PySequenceSlots.SQ_CONTAINS))
 
         # set should NOT have mapping protocol
@@ -150,7 +150,7 @@ class TestTypeSlots(TestCase):
 
         seq_slots, map_slots, num_slots, type_slots = self._get_slot_info(SetSubclass)
 
-        # Set subclasses should have sq_contains
+        # Set subclasses should have sq_contains_impl
         self.assertTrue(has_slot(seq_slots, PySequenceSlots.SQ_CONTAINS))
 
     def test_tuple_subclass_slots(self):
@@ -264,7 +264,7 @@ class TestTypeSlots(TestCase):
         """Test that frozenset has sequence protocol for contains."""
         seq_slots, map_slots, num_slots, type_slots = self._get_slot_info(frozenset)
 
-        # frozenset SHOULD have sq_contains
+        # frozenset SHOULD have sq_contains_impl
         self.assertTrue(has_slot(seq_slots, PySequenceSlots.SQ_CONTAINS))
 
     def test_float_slots(self):

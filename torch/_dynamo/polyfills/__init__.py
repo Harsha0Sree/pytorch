@@ -291,7 +291,7 @@ def dictview_richcompare(
     """Mirrors dictview_richcompare for dict_keys/dict_items vs set/frozenset.
 
     https://github.com/python/cpython/blob/e76aa128fe/Objects/dictobject.c#L5952-L6010
-    Uses len() and ``in`` so that Dynamo traces through sq_length/sq_contains.
+    Uses len() and ``in`` so that Dynamo traces through sq_length_impl/sq_contains_impl.
     """
     len_self = len(self)  # type: ignore[arg-type]
     len_other = len(other)  # type: ignore[arg-type]

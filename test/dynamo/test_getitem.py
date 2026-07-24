@@ -942,7 +942,7 @@ class GetItemTests(torch._dynamo.test_case.TestCase):
         self.assertEqual(fn(x), self._compile(fn, x))
 
     def test_deque_negative_index(self):
-        """pysequence_getitem wraps negative indices via sq_length before sq_item."""
+        """pysequence_getitem wraps negative indices via sq_length_impl before sq_item."""
 
         def fn(x):
             d = collections.deque([x, x + 1, x + 2])

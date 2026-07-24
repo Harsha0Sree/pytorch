@@ -4,7 +4,7 @@
 Tests for the `in` operator and __contains__ protocol in PyTorch Dynamo.
 
 Tests cover:
-- sq_contains protocol: list, tuple, str, range, set, frozenset
+- sq_contains_impl protocol: list, tuple, str, range, set, frozenset
 - mp_contains protocol: dict, dict.keys()
 - Fallback iteration: objects with __iter__ but no __contains__
 - Sequence-protocol fallback: objects with __getitem__ but no __contains__/__iter__
@@ -771,7 +771,7 @@ class DictViewContainsTest(torch._dynamo.test_case.TestCase):
     def test_items_contains_non_pair(self):
         # A hashable item that is not a (key, value) pair can never be in
         # items(); exercises the generic (non-2-tuple) path of
-        # DictItemsVariable.sq_contains. CPython returns False.
+        # DictItemsVariable.sq_contains_impl. CPython returns False.
         d = {"a": 1, "b": 2}
         self.assertFalse(5 in d.items())
         self.assertFalse((1, 2, 3) in d.items())
